@@ -1,0 +1,14 @@
+<div class="text-center mt-3 mb-3">
+    <form>
+        <!-- databinding photos - dado vem do template para o componente-->
+        <i aria-hidden="true" class="fa fa-search mr-1"></i>
+        <input
+            class="rounded"
+            type="search"
+            placeholder="search..."
+            autofocus
+            (keyup)="filtrar($event)"  
+            [value]="value"
+            >
+    </form>
+</div>
