@@ -1,1 +1,61 @@
-<p>photo-form works!</p>
+<div class="container">
+  <form [formGroup]="photoForm" class="row" (submit)="upload()">
+    <div class="col-md-6 text-center">
+        <div>
+            <app-photo *ngIf="preview" [url]="preview" [description]="preview"></app-photo>
+        </div>
+        <div class="form-group" >
+            <button immediateClick type="button" (click)="fileInput.click()" class="btn btn-primary">
+                <i class="fa fa-image fa-4x align-middle"></i>
+            </button>
+            <input
+                #fileInput
+                hidden
+                formControlName="file"
+                type="file"
+                accept="image/*"
+                (change)="getFile($event)"
+            />
+          <app-vmessage
+            *ngIf="photoForm.get('file')?.errors?.['required']"
+            text="Photo is required"
+          ></app-vmessage>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <textarea
+          formControlName="description"
+          class="form-control form-control-sm"
+          placeholder="photo description"
+        ></textarea>
+        <app-vmessage
+          *ngIf="photoForm.get('description')?.errors?.['required']"
+          text="Description is required"
+        ></app-vmessage>
+        <app-vmessage
+          *ngIf="photoForm.get('description')?.errors?.['maxlength']"
+          text="Description deve ter no máximo 250 caracteres"
+        ></app-vmessage>
+      </div>
+
+      <div class="form-group">
+        <label class="text-muted">
+          Allow comments
+          <input formControlName="allowComments" type="checkbox" />
+        </label>
+      </div>
+
+      <button
+        [disabled]="photoForm.invalid"
+        type="submit"
+        class="btn btn-primary btn-block"
+      >
+        Upload
+      </button>
+
+      <a class="btn btn-secondary btn-block">Cancel</a>
+    </div>
+  </form>
+</div>
