@@ -16,8 +16,6 @@ export class PhotoOwnerOnlyDirective implements OnInit{
     ){}
 
     ngOnInit(): void {
-        console.log(this.ownedPhoto);
-        
         this.userService
             .getUser()
             .subscribe((user) => {
